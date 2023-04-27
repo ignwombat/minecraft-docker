@@ -2,7 +2,7 @@ FROM ubuntu:22.04 AS tmp
 WORKDIR /tmp
 ADD ["$JAVA_RUNTIME", "/tmp"]
 
-FROM ubuntu:22.04 AS build
+FROM ubuntu:22.04
 WORKDIR /server
 
 COPY --from=tmp /tmp/*/* ./jre
