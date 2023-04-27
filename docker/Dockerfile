@@ -2,10 +2,9 @@ FROM ubuntu:22.04
 WORKDIR /tmp
 
 ADD ["$JAVA_RUNTIME", "/tmp"]
-
-WORKDIR /server
 COPY ["/tmp/*/*", "/server/jre"]
 
+WORKDIR /server
 COPY ["$MINECRAFT_SERVER_JARFILE", "/server/server.jar"]
 
 COPY ["data/[^world^config]*", "/server"]
