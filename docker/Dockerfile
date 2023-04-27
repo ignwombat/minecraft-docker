@@ -5,6 +5,7 @@ ADD ["$JAVA_RUNTIME", "/tmp"]
 FROM ubuntu:22.04
 WORKDIR /server
 
+RUN mkdir jre
 COPY --from=tmp /tmp/*/* ./jre
 
 COPY ["$MINECRAFT_SERVER_JARFILE", "server.jar"]
