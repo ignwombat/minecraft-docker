@@ -1,10 +1,12 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04 AS tmp
 WORKDIR /tmp
-
 ADD ["$JAVA_RUNTIME", "/tmp"]
-COPY ["/tmp/*/*", "/server/jre"]
 
+FROM ubuntu:22.04 AS build
 WORKDIR /server
+
+COPY --from=tmp /tmp/*/* /server/jre
+
 COPY ["$MINECRAFT_SERVER_JARFILE", "/server/server.jar"]
 
 COPY ["data/[^world^config]*", "/server"]
