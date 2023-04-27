@@ -1,7 +1,9 @@
 FROM ubuntu:22.04
 WORKDIR /server
 
-ADD ["$JAVA_RUNTIME", "/server/jre"]
+ADD ["$JAVA_RUNTIME", "/tmp"]
+COPY ["/tmp/*/*", "/server/jre"]
+
 COPY ["$MINECRAFT_SERVER_JARFILE", "/server/server.jar"]
 
 COPY ["data/[^world^config]*", "/server"]

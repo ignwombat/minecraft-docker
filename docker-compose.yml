@@ -21,13 +21,7 @@ services:
       - ${MINECRAFT_SERVER_PORT-25565}
 
     volumes:
-      - world:/server/world
-      - config:/server/config
+      - ./world:/server/world
+      - ./config:/server/config
     
     restart: always
-
-volumes:
-  world:
-    external: true
-  config:
-    external: true
