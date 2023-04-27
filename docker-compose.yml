@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  minecraft:
+    build: docker
+    container_name: minecraft
+
+    stdin_open: true
+    tty: true
+    
+    env_file: minecraft.env
+    environment:
+      - "JAVA_RUNTIME=${JAVA_RUNTIME-java.tar.gz}"
+      - "MINECRAFT_SERVER_JARFILE=${MINECRAFT_SERVER_JARFILE-server.jar}"
+
+      - "MINECRAFT_SERVER_MIN_RAM=${MINECRAFT_SERVER_MIN_RAM-1G}"
+      - "MINECRAFT_SERVER_MAX_RAM=${MINECRAFT_SERVER_MAX_RAM-1G}"
+
+      - "MINECRAFT_SERVER_PORT=${MINECRAFT_SERVER_PORT-25565}"
+    
+    ports:
+      - ${MINECRAFT_SERVER_PORT-25565}
+
+    volumes:
+      - /server/world:./world
+      - /server/config:./config
+    
+    restart: always
