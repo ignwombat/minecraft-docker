@@ -73,7 +73,6 @@ Because [minecraft.env](./minecraft.env) doesn't load before docker compose, you
 ```env
 MINECRAFT_SERVER_PORT=25566
 ```
-You must also change the port in [server.properties](./docker/data/server.properties).
 
 ## Plugin configs
 If you're using plugins that require configuration files, the config folder will be available in the root folder after the first launch, similar to the world folder.
