@@ -2,7 +2,9 @@
 # The archive comes with a subfolder with the version name
 
 FROM ubuntu:22.04 AS tmp
-ADD ${JAVA_RUNTIME} /jre
+
+RUN DEBIAN_FRONTEND=noninteractive apt install -y tar
+RUN tar -xf ${JAVA_RUNTIME} -C /jre
 
 FROM ubuntu:22.04
 
@@ -12,9 +14,7 @@ COPY --from=tmp /jre/*/* ./jre
 COPY ${MINECRAFT_SERVER_JARFILE} ./server.jar
 COPY data/[^world^config]* .
 
-EXPOSE ${MINECRAFT_SERVER_PORT}
+EXPOSE 25565
 
 COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
-
-ENTRYPOINT MIN_RAM=${MINECRAFT_SERVER_MIN_RAM} MAX_RAM=${MINECRAFT_SERVER_MAX_RAM} ./entrypoint.sh
+ENTRYPOINT MIN_RAM=${MINECRAFT_SERVER_MIN_RAM} MAX_RAM=${MINECRAFT_SERVER_MAX_RAM} sh ./entrypoint.sh
